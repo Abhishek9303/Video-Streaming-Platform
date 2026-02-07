@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Video Player - Premium streaming experience">
-    <title>Video Player | Premium Streaming</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Security Monitoring System - Live Cameras">
+    <title>Security System - Live Monitoring</title>
     <style>
         * {
             margin: 0;
@@ -16,182 +13,176 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            min-height: 100vh;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #818CF8 0%, #6366F1 100%);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #C084FC 0%, #A855F7 100%);
-            bottom: -50px;
-            left: -100px;
-            animation-delay: -3s;
-        }
-
-        .orb-3 {
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, #F472B6 0%, #EC4899 100%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-30px) scale(1.05);
-            }
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.5;
         }
 
         /* Header */
         .header {
-            position: relative;
-            z-index: 10;
-            padding: 1.5rem 3rem;
+            background: linear-gradient(to bottom, #4a7ebb 0%, #3d6a9e 100%);
+            border-bottom: 1px solid #2d5a8e;
+            padding: 8px 15px;
+            color: white;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 15, 35, 0.5);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #818CF8 0%, #C084FC 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        .logo svg {
-            width: 40px;
-            height: 40px;
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+        }
+
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
-        .welcome-text {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
+        .logout-link {
+            color: #cce0ff;
+            text-decoration: none;
         }
 
-        .welcome-text strong {
-            color: #fff;
-            font-weight: 600;
+        .logout-link:hover {
+            text-decoration: underline;
         }
 
-        .logout-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
+        /* Main Container */
+        .main-container {
+            max-width: 100%;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 20px 100px;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .page-title {
-            text-align: center;
-            margin-bottom: 2rem;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
         }
 
-        .page-title h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .camera-count {
+            font-size: 11px;
+            color: #666;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border: 1px solid #ccc;
         }
 
-        .page-title p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Video Container */
-        .video-container {
-            position: relative;
-            background: rgba(20, 20, 40, 0.8);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 
-                0 25px 80px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 0 60px rgba(129, 140, 248, 0.05);
-            backdrop-filter: blur(20px);
+        .toolbar-label {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .grid-btn {
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 100%);
+            border: 1px solid #999;
+            padding: 4px 10px;
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .grid-btn:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8e8e8 100%);
+        }
+
+        .grid-btn.active {
+            background: linear-gradient(to bottom, #3d6a9e 0%, #4a7ebb 100%);
+            color: white;
+            border-color: #2d5a8e;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .video-grid.grid-2x2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .video-grid.grid-3x3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .video-grid.grid-4x4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* Video Card */
+        .video-card {
+            border: 1px solid #999;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            border-color: #3d6a9e;
         }
 
         .video-wrapper {
             position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
+            aspect-ratio: 4 / 3;
+            background: #1a1a1a;
         }
 
         .video-wrapper video {
@@ -200,503 +191,371 @@
             object-fit: cover;
         }
 
-        /* Video Overlay */
-        .video-overlay {
+        .video-info {
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e5e5e5 100%);
+            border-top: 1px solid #999;
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .camera-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .camera-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .rec-badge {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .rec-badge::before {
+            content: "●";
+            animation: blink 1s infinite;
+        }
+
+        .camera-time {
+            color: #666;
+        }
+
+        /* Click to enlarge indicator */
+        .enlarge-hint {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #999;
+            padding: 8px 15px;
+            font-size: 11px;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .video-card:hover .enlarge-hint {
+            opacity: 1;
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: #000;
+            z-index: 1000;
+            display: none;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fullscreen-header {
+            background: linear-gradient(to bottom, #4a7ebb 0%, #3d6a9e 100%);
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .fullscreen-title {
+            font-size: 14px;
+            font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.4);
-            transition: opacity 0.3s ease;
+            gap: 15px;
+        }
+
+        .close-btn {
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 100%);
+            border: 1px solid #999;
+            padding: 5px 15px;
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
             cursor: pointer;
+            color: #333;
         }
 
-        .video-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
+        .close-btn:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #e8e8e8 100%);
         }
 
-        .play-button {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #818CF8 0%, #C084FC 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 
-                0 20px 60px rgba(129, 140, 248, 0.4),
-                0 0 0 20px rgba(129, 140, 248, 0.1),
-                0 0 0 40px rgba(129, 140, 248, 0.05);
-            transition: all 0.3s ease;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: 
-                0 25px 70px rgba(129, 140, 248, 0.5),
-                0 0 0 25px rgba(129, 140, 248, 0.15),
-                0 0 0 50px rgba(129, 140, 248, 0.08);
-        }
-
-        .play-button svg {
-            width: 40px;
-            height: 40px;
-            margin-left: 5px;
-            fill: white;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 
-                    0 20px 60px rgba(129, 140, 248, 0.4),
-                    0 0 0 20px rgba(129, 140, 248, 0.1),
-                    0 0 0 40px rgba(129, 140, 248, 0.05);
-            }
-            50% {
-                box-shadow: 
-                    0 20px 60px rgba(129, 140, 248, 0.5),
-                    0 0 0 30px rgba(129, 140, 248, 0.15),
-                    0 0 0 60px rgba(129, 140, 248, 0.08);
-            }
-        }
-
-        /* Video Info */
-        .video-info {
-            padding: 2rem;
-            background: rgba(15, 15, 35, 0.5);
-        }
-
-        .video-info h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .video-meta {
-            display: flex;
-            gap: 20px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .video-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .video-meta svg {
-            width: 16px;
-            height: 16px;
-            stroke: currentColor;
-        }
-
-        .video-description {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        /* Custom Video Controls */
-        .custom-controls {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 1rem 2rem;
-            background: rgba(0, 0, 0, 0.6);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .control-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            background: rgba(129, 140, 248, 0.3);
-            transform: scale(1.05);
-        }
-
-        .control-btn svg {
-            width: 20px;
-            height: 20px;
-            stroke: white;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .progress-container {
+        .fullscreen-video-container {
             flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #818CF8, #C084FC);
-            border-radius: 3px;
-            transition: width 0.1s linear;
-            position: relative;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .progress-container:hover .progress-bar::after {
-            opacity: 1;
-        }
-
-        .time-display {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            min-width: 100px;
-            text-align: center;
-        }
-
-        .volume-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            background: #000;
         }
 
-        .volume-slider {
-            width: 80px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            appearance: none;
-            cursor: pointer;
+        .fullscreen-video-container video {
+            max-width: 100%;
+            max-height: 100%;
         }
 
-        .volume-slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
+        .fullscreen-footer {
+            background: #1a1a1a;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            color: #ccc;
+            font-size: 11px;
         }
 
         /* Footer */
         .footer {
+            margin-top: 20px;
+            padding: 15px 0;
+            border-top: 1px solid #ddd;
+            font-size: 10px;
+            color: #999;
             text-align: center;
-            padding: 2rem;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .header {
-                padding: 1rem 1.5rem;
+        @media (max-width: 900px) {
+            .video-grid.grid-4x4 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .video-grid.grid-3x3,
+            .video-grid.grid-4x4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-content {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 8px;
             }
+        }
 
-            .main-content {
-                padding: 1.5rem 1rem;
-            }
-
-            .page-title h1 {
-                font-size: 1.8rem;
-            }
-
-            .video-info {
-                padding: 1.5rem;
-            }
-
-            .custom-controls {
-                padding: 1rem;
-                flex-wrap: wrap;
-            }
-
-            .play-button {
-                width: 70px;
-                height: 70px;
-            }
-
-            .play-button svg {
-                width: 28px;
-                height: 28px;
+        @media (max-width: 500px) {
+            .video-grid.grid-2x2,
+            .video-grid.grid-3x3,
+            .video-grid.grid-4x4 {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-animation">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">📹 Security Monitoring System</div>
+            <div class="header-right">
+                <div class="live-status">
+                    <span class="live-dot"></span>
+                    <span>LIVE</span>
+                </div>
+                <span id="header-datetime"></span>
+                <div class="user-info">
+                    <span>Logged in as: <strong id="username-display">Admin</strong></span>
+                    <a href="#" class="logout-link" id="logout-btn">[Logout]</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <header class="header">
-        <div class="logo">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="22" stroke="url(#logo-gradient)" stroke-width="3"/>
-                <path d="M24 12L32 28H16L24 12Z" fill="url(#logo-gradient)"/>
-                <circle cx="24" cy="32" r="4" fill="url(#logo-gradient)"/>
-                <defs>
-                    <linearGradient id="logo-gradient" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#818CF8"/>
-                        <stop offset="1" stop-color="#C084FC"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-            StreamHub
-        </div>
-        <div class="user-info">
-            <span class="welcome-text">Welcome, <strong id="username-display">User</strong></span>
-            <button class="logout-btn" id="logout-btn">Logout</button>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="page-title">
-            <h1>Now Playing</h1>
-            <p>Enjoy your premium streaming experience</p>
-        </div>
-
-        <div class="video-container">
-            <div class="video-wrapper">
-                <video id="main-video" preload="metadata">
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay" id="video-overlay">
-                    <div class="play-button" id="big-play-btn">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="5,3 19,12 5,21"/>
-                        </svg>
-                    </div>
-                </div>
+    <div class="main-container">
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="page-title">Live Camera Feeds</h1>
+                <span class="camera-count" id="camera-count">9 cameras online</span>
             </div>
-
-            <div class="custom-controls">
-                <button class="control-btn" id="play-pause-btn" title="Play/Pause">
-                    <svg id="play-icon" viewBox="0 0 24 24">
-                        <polygon points="5,3 19,12 5,21" fill="white" stroke="none"/>
-                    </svg>
-                    <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;">
-                        <rect x="6" y="4" width="4" height="16" fill="white"/>
-                        <rect x="14" y="4" width="4" height="16" fill="white"/>
-                    </svg>
-                </button>
-
-                <div class="progress-container" id="progress-container">
-                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
-                </div>
-
-                <span class="time-display">
-                    <span id="current-time">0:00</span> / <span id="duration">0:00</span>
-                </span>
-
-                <div class="volume-container">
-                    <button class="control-btn" id="mute-btn" title="Mute">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="white" stroke="none"/>
-                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="white" fill="none" stroke-width="2"/>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="white" fill="none" stroke-width="2"/>
-                        </svg>
-                    </button>
-                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
-                </div>
-
-                <button class="control-btn" id="fullscreen-btn" title="Fullscreen">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="video-info">
-                <h2>Big Buck Bunny</h2>
-                <div class="video-meta">
-                    <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12,6 12,12 16,14"/>
-                        </svg>
-                        9:56
-                    </span>
-                    <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                        2.4M views
-                    </span>
-                    <span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        Demo Video
-                    </span>
-                </div>
-                <p class="video-description">
-                    Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps and the rabbit gets very angry. This is a sample video for demonstration purposes.
-                </p>
+            <div class="toolbar-right">
+                <span class="toolbar-label">View:</span>
+                <button class="grid-btn" data-grid="2x2">2×2</button>
+                <button class="grid-btn active" data-grid="3x3">3×3</button>
+                <button class="grid-btn" data-grid="4x4">4×4</button>
             </div>
         </div>
-    </main>
 
-    <footer class="footer">
-        <p>© 2026 StreamHub. Premium streaming experience.</p>
-    </footer>
+        <div class="video-grid grid-3x3" id="video-grid">
+            <!-- Generated by JavaScript -->
+        </div>
+
+        <div class="footer">
+            <p>Security Monitoring System v2.1 | © 2005 Security Corp. All rights reserved.</p>
+            <p><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Help</a></p>
+        </div>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreen-modal">
+        <div class="fullscreen-header">
+            <div class="fullscreen-title">
+                <span id="fullscreen-camera-name">Camera 1</span>
+                <span class="rec-badge">REC</span>
+            </div>
+            <button class="close-btn" id="close-fullscreen">✕ Close</button>
+        </div>
+        <div class="fullscreen-video-container">
+            <video id="fullscreen-video" autoplay loop muted playsinline controls></video>
+        </div>
+        <div class="fullscreen-footer">
+            <span id="fullscreen-location">Location</span>
+            <span id="fullscreen-timestamp"></span>
+        </div>
+    </div>
 
     <script>
-        // Get username from localStorage
-        const username = localStorage.getItem('username') || 'User';
-        document.getElementById('username-display').textContent = username;
+        // Camera feeds
+        const cameraFeeds = [
+            { id: 1, name: "Camera 1", location: "Main Entrance", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
+            { id: 2, name: "Camera 2", location: "Lobby", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
+            { id: 3, name: "Camera 3", location: "Parking Lot A", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { id: 4, name: "Camera 4", location: "Server Room", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { id: 5, name: "Camera 5", location: "Conference Room", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
+            { id: 6, name: "Camera 6", location: "Warehouse", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+            { id: 7, name: "Camera 7", location: "Back Exit", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
+            { id: 8, name: "Camera 8", location: "Parking Lot B", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
+            { id: 9, name: "Camera 9", location: "Rooftop", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" }
+        ];
 
-        // Video elements
-        const video = document.getElementById('main-video');
-        const videoOverlay = document.getElementById('video-overlay');
-        const bigPlayBtn = document.getElementById('big-play-btn');
-        const playPauseBtn = document.getElementById('play-pause-btn');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('progress-bar');
-        const currentTimeDisplay = document.getElementById('current-time');
-        const durationDisplay = document.getElementById('duration');
-        const muteBtn = document.getElementById('mute-btn');
-        const volumeSlider = document.getElementById('volume-slider');
-        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        // DOM Elements
+        const videoGrid = document.getElementById('video-grid');
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        const fullscreenVideo = document.getElementById('fullscreen-video');
+        const fullscreenCameraName = document.getElementById('fullscreen-camera-name');
+        const fullscreenLocation = document.getElementById('fullscreen-location');
+        const fullscreenTimestamp = document.getElementById('fullscreen-timestamp');
+        const closeFullscreen = document.getElementById('close-fullscreen');
+        const gridButtons = document.querySelectorAll('.grid-btn');
         const logoutBtn = document.getElementById('logout-btn');
 
-        // Format time
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        // Get username
+        const username = localStorage.getItem('username') || 'Admin';
+        document.getElementById('username-display').textContent = username;
+        document.getElementById('camera-count').textContent = `${cameraFeeds.length} cameras online`;
+
+        // Update datetime
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('header-datetime').textContent = now.toLocaleString();
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Generate video cards
+        function generateVideoCards() {
+            videoGrid.innerHTML = '';
+            
+            cameraFeeds.forEach((camera) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                
+                card.innerHTML = `
+                    <div class="video-wrapper">
+                        <video autoplay loop muted playsinline>
+                            <source src="${camera.video}" type="video/mp4">
+                        </video>
+                        <div class="enlarge-hint">Click to enlarge</div>
+                    </div>
+                    <div class="video-info">
+                        <span class="camera-name">${camera.name}</span>
+                        <div class="camera-status">
+                            <span class="rec-badge">REC</span>
+                            <span class="camera-time"></span>
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', () => openFullscreen(camera));
+                videoGrid.appendChild(card);
+            });
+
+            updateTimestamps();
         }
 
-        // Toggle play/pause
-        function togglePlay() {
-            if (video.paused) {
-                video.play();
-                videoOverlay.classList.add('hidden');
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-            } else {
-                video.pause();
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-            }
+        // Update timestamps
+        function updateTimestamps() {
+            const timestamps = document.querySelectorAll('.camera-time');
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            timestamps.forEach(ts => ts.textContent = timeStr);
         }
-
-        // Event listeners
-        bigPlayBtn.addEventListener('click', togglePlay);
-        playPauseBtn.addEventListener('click', togglePlay);
-        video.addEventListener('click', togglePlay);
-
-        // Update progress bar
-        video.addEventListener('timeupdate', () => {
-            const progress = (video.currentTime / video.duration) * 100;
-            progressBar.style.width = `${progress}%`;
-            currentTimeDisplay.textContent = formatTime(video.currentTime);
-        });
-
-        // Set duration when metadata is loaded
-        video.addEventListener('loadedmetadata', () => {
-            durationDisplay.textContent = formatTime(video.duration);
-        });
-
-        // Seek functionality
-        progressContainer.addEventListener('click', (e) => {
-            const rect = progressContainer.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            video.currentTime = pos * video.duration;
-        });
-
-        // Video ended
-        video.addEventListener('ended', () => {
-            videoOverlay.classList.remove('hidden');
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-        });
-
-        // Volume control
-        volumeSlider.addEventListener('input', (e) => {
-            video.volume = e.target.value;
-        });
-
-        // Mute toggle
-        muteBtn.addEventListener('click', () => {
-            video.muted = !video.muted;
-            volumeSlider.value = video.muted ? 0 : video.volume;
-        });
+        setInterval(updateTimestamps, 1000);
 
         // Fullscreen
-        fullscreenBtn.addEventListener('click', () => {
-            if (document.fullscreenElement) {
-                document.exitFullscreen();
-            } else {
-                document.querySelector('.video-container').requestFullscreen();
+        function openFullscreen(camera) {
+            fullscreenCameraName.textContent = camera.name;
+            fullscreenLocation.textContent = camera.location;
+            fullscreenVideo.src = camera.video;
+            fullscreenVideo.play();
+            fullscreenModal.classList.add('active');
+            updateFullscreenTimestamp();
+        }
+
+        function updateFullscreenTimestamp() {
+            fullscreenTimestamp.textContent = new Date().toLocaleString();
+        }
+        setInterval(() => {
+            if (fullscreenModal.classList.contains('active')) {
+                updateFullscreenTimestamp();
             }
+        }, 1000);
+
+        closeFullscreen.addEventListener('click', () => {
+            fullscreenModal.classList.remove('active');
+            fullscreenVideo.pause();
+            fullscreenVideo.src = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && fullscreenModal.classList.contains('active')) {
+                fullscreenModal.classList.remove('active');
+                fullscreenVideo.pause();
+                fullscreenVideo.src = '';
+            }
+        });
+
+        // Grid switching
+        gridButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                gridButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                videoGrid.className = `video-grid grid-${btn.dataset.grid}`;
+            });
         });
 
         // Logout
-        logoutBtn.addEventListener('click', () => {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             localStorage.removeItem('username');
             window.location.href = 'index.html';
         });
 
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space') {
-                e.preventDefault();
-                togglePlay();
-            } else if (e.code === 'ArrowRight') {
-                video.currentTime += 10;
-            } else if (e.code === 'ArrowLeft') {
-                video.currentTime -= 10;
-            } else if (e.code === 'ArrowUp') {
-                video.volume = Math.min(1, video.volume + 0.1);
-                volumeSlider.value = video.volume;
-            } else if (e.code === 'ArrowDown') {
-                video.volume = Math.max(0, video.volume - 0.1);
-                volumeSlider.value = video.volume;
-            } else if (e.code === 'KeyM') {
-                video.muted = !video.muted;
-            } else if (e.code === 'KeyF') {
-                fullscreenBtn.click();
-            }
-        });
+        // Initialize
+        generateVideoCards();
     </script>
 </body>
 </html>
