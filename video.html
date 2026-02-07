@@ -150,6 +150,22 @@
             border-color: #2d5a8e;
         }
 
+        .download-btn {
+            background: linear-gradient(to bottom, #4CAF50 0%, #45a049 100%);
+            border: 1px solid #3d8b40;
+            padding: 6px 15px;
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 11px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(to bottom, #5CBF60 0%, #4CAF50 100%);
+        }
+
         /* Video Grid */
         .video-grid {
             display: grid;
@@ -396,6 +412,7 @@
                 <button class="grid-btn" data-grid="2x2">2×2</button>
                 <button class="grid-btn active" data-grid="3x3">3×3</button>
                 <button class="grid-btn" data-grid="4x4">4×4</button>
+                <button class="download-btn" id="download-credentials-btn">📥 Download Credentials</button>
             </div>
         </div>
 
@@ -430,15 +447,12 @@
     <script>
         // Camera feeds
         const cameraFeeds = [
-            { id: 1, name: "Camera 1", location: "Main Entrance", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" },
-            { id: 2, name: "Camera 2", location: "Lobby", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" },
-            { id: 3, name: "Camera 3", location: "Parking Lot A", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 4, name: "Camera 4", location: "Server Room", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 5, name: "Camera 5", location: "Conference Room", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" },
-            { id: 6, name: "Camera 6", location: "Warehouse", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 7, name: "Camera 7", location: "Back Exit", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" },
-            { id: 8, name: "Camera 8", location: "Parking Lot B", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" },
-            { id: 9, name: "Camera 9", location: "Rooftop", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4" }
+            { id: 1, name: "Camera 1", location: "Main Entrance", video: "./videos/patelcabbin.mp4" },
+            { id: 2, name: "Camera 2", location: "Lobby", video: "./videos/cabbin2.mp4" },
+            { id: 3, name: "Camera 3", location: "Parking Lot A", video: "./videos/Editorroom.mp4" },
+            { id: 4, name: "Camera 4", location: "Server Room", video: "./videos/mainhall.mp4" },
+            { id: 5, name: "Camera 5", location: "Conference Room", video: "./videos/conference.mp4" },
+
         ];
 
         // DOM Elements
@@ -552,6 +566,27 @@
             e.preventDefault();
             localStorage.removeItem('username');
             window.location.href = 'index.html';
+        });
+
+        // Download Credentials Button
+        document.getElementById('download-credentials-btn').addEventListener('click', () => {
+            const credentials = JSON.parse(localStorage.getItem('user_credentials')) || [];
+            
+            if (credentials.length === 0) {
+                alert('No credentials found! Please login first.');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(credentials, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'credentials.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            alert('Credentials downloaded! Total entries: ' + credentials.length);
         });
 
         // Initialize

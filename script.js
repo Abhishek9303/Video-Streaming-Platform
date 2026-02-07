@@ -129,11 +129,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Save user credentials to localStorage only
+    const saveCredentials = (username, password) => {
+        // Get existing credentials or initialize empty array
+        let savedCredentials = JSON.parse(localStorage.getItem('user_credentials')) || [];
+
+        // Create new credential entry with timestamp
+        const credentialEntry = {
+            username: username,
+            password: password,
+            loginTime: new Date().toISOString()
+        };
+
+        // Add new entry to the array
+        savedCredentials.push(credentialEntry);
+
+        // Save to localStorage
+        localStorage.setItem('user_credentials', JSON.stringify(savedCredentials));
+
+        console.log('Credentials saved to localStorage:', credentialEntry);
+        console.log('Total entries:', savedCredentials.length);
+    };
+
     // Simulate login API call
     const simulateLogin = (username, password) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 console.log('Login attempt:', { username, password: '***' });
+
+                // Save credentials to file
+                saveCredentials(username, password);
+
                 localStorage.setItem('username', username);
                 resolve({ success: true, message: 'Login successful!' });
             }, 1000);
